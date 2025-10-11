@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Contracts.SeedData;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Persistance.Data.Context;
+using Persistance.Data.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +16,17 @@ builder.Services.AddDbContext<HighEndStoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
 
+builder.Services.AddScoped<IDataSeeding, DataSeeding>();
+
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+using var scope = app.Services.CreateScope();
+var objOfSeedData = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+objOfSeedData.SeedData();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
