@@ -1,7 +1,4 @@
-﻿using Domain.Entities.ProductModule;
-using Microsoft.EntityFrameworkCore;
-
-namespace Persistance.Data.Context
+﻿namespace Persistance.Data.Context
 {
     public class HighEndStoreDbContext(DbContextOptions<HighEndStoreDbContext> options) : DbContext(options)
     {

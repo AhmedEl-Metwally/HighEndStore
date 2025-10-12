@@ -1,6 +1,5 @@
 ﻿using Domain.Contracts.SeedData;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
 
@@ -26,7 +25,7 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 var objOfSeedData = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
-objOfSeedData.SeedData();
+await objOfSeedData.SeedDataAsync();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
