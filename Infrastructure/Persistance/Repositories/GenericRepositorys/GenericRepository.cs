@@ -1,5 +1,4 @@
-﻿
-namespace Persistance.Repositories.Implementation
+﻿namespace Persistance.Repositories.GenericRepositorys
 {
     public class GenericRepository<TEntity,TKey>(HighEndStoreDbContext _context) : IGenericRepository<TEntity,TKey> where TEntity : BaseEntity<TKey>
     {
