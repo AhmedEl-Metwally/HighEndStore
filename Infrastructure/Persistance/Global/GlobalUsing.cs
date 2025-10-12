@@ -4,3 +4,5 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Domain.Contracts.SeedData;
 global using Persistance.Data.Context;
 global using System.Text.Json;
+global using Domain.Contracts.Repositories.Interface;
+global using Domain.Entities;

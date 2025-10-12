@@ -1,7 +1,9 @@
-﻿using Domain.Contracts.SeedData;
+﻿using Domain.Contracts.Repositories.Interface;
+using Domain.Contracts.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
+using Persistance.Repositories.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,7 @@ builder.Services.AddDbContext<HighEndStoreDbContext>(options =>
 });
 
 builder.Services.AddScoped<IDataSeeding, DataSeeding>();
-
+//builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
