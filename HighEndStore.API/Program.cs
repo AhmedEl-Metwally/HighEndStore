@@ -20,9 +20,10 @@ builder.Services.AddDbContext<HighEndStoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
 
-builder.Services.AddScoped<IDataSeeding, DataSeeding>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDataSeeding,DataSeeding>();
+builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<IServiceManager,ServiceManager>();
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddAutoMapper(Mapping => Mapping.AddProfile(new ProductProfile()));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
