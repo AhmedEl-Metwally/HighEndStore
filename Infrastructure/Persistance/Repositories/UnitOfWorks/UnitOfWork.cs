@@ -8,7 +8,7 @@ namespace Persistance.Repositories.UnitOfWorks
     {
         private readonly ConcurrentDictionary<string, object> _dictionary = new();
 
-        public IGenericRepository<TEntity, Tkey> GenericRepository<TEntity, Tkey>() where TEntity : BaseEntity<Tkey>
+        public IGenericRepository<TEntity, Tkey> GetRepository<TEntity, Tkey>() where TEntity : BaseEntity<Tkey>
             => (IGenericRepository<TEntity, Tkey>)_dictionary.GetOrAdd(typeof(TEntity).Name, (_) => new GenericRepository<TEntity, Tkey>(_context));
 
         public async Task<int> SaveChangesAsync()

@@ -8,7 +8,7 @@
         public async Task<IEnumerable<TEntity>> GetAllAsync(bool asNoTracking = false)
                => asNoTracking ? await _context.Set<TEntity>().AsNoTracking().ToListAsync() : await _context.Set<TEntity>().ToListAsync();
 
-        public async Task<TEntity?> GetAllByIdAsync(TKey id)
+        public async Task<TEntity?> GetByIdAsync(TKey id)
                => await _context.Set<TEntity>().FindAsync(id);
 
         public void Update(TEntity entity)
