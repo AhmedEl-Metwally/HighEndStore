@@ -2,8 +2,6 @@
 using Domain.Contracts.UnitOfWorks;
 using Services.Abstraction.Interface;
 
-
-
 namespace Services.Implementation
 {
     public class ServiceManager(IUnitOfWork _unitOfWork,IMapper _mapper) : IServiceManager

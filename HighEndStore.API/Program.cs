@@ -1,6 +1,7 @@
 ﻿using Domain.Contracts.SeedData;
 using Domain.Contracts.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
 using Persistance.Repositories.UnitOfWorks;
@@ -25,6 +26,9 @@ builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<IServiceManager,ServiceManager>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddAutoMapper(Mapping => Mapping.AddProfile(new ProductProfile()));
+builder.Services.AddTransient<PictureUrlResolver>();
+
+
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -48,6 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
