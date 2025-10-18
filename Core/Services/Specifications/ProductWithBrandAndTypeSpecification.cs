@@ -7,8 +7,9 @@ namespace Services.Specifications
     public class ProductWithBrandAndTypeSpecification : BaseSpecifications<Product,int>
     {
         public ProductWithBrandAndTypeSpecification(ProductSpecificationParameters parameters) : base
-                                                                                    (P =>(!parameters.typeId.HasValue || P.TypeId == parameters.typeId) &&
-                                                                                                 (!parameters.brandId.HasValue || P.BrandId == parameters.brandId))
+                                                   (P =>(!parameters.typeId.HasValue || P.TypeId == parameters.typeId) &&
+                                                                (!parameters.brandId.HasValue || P.BrandId == parameters.brandId) &&
+                                                                (string.IsNullOrEmpty(parameters.Search) || P.Name.ToLower().Contains(parameters.Search.ToLower())))
         {
             AddIncludes(p => p.ProductBrand);
             AddIncludes(p => p.ProductType);

@@ -7,5 +7,6 @@ namespace Shared.Specifications
         public int? typeId { get; set; }
         public int? brandId { get; set; }
         public ProductSortingOptions productSorting { get; set; }
+        public string? Search { get; set; }
     }
 }
