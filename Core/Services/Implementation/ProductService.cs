@@ -5,6 +5,7 @@ using Services.Abstraction.Interface;
 using Services.Specifications;
 using Shared.Dtos.ProductsDto;
 using Shared.Enums;
+using Shared.Specifications;
 
 namespace Services.Implementation
 {
@@ -18,10 +19,10 @@ namespace Services.Implementation
             return brandsResult;
         }
 
-        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(int? typeId, int? brandId, ProductSortingOptions productSorting)
+        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(ProductSpecificationParameters parameters)
         {
             var productRep = _unitOfWork.GetRepository<Product,int>() ;
-            var specification = new ProductWithBrandAndTypeSpecification(typeId, brandId, productSorting);
+            var specification = new ProductWithBrandAndTypeSpecification(parameters);
             var products = await productRep.GetAllAsync(specification);
             var productResult = _mapper.Map<IEnumerable<ProductResultDto>>(products);
             return productResult;

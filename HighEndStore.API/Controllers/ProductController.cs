@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Interface;
 using Shared.Dtos.ProductsDto;
-using Shared.Enums;
+using Shared.Specifications;
 
 namespace HighEndStore.API.Controllers
 {
@@ -11,8 +10,8 @@ namespace HighEndStore.API.Controllers
     public class ProductController(IServiceManager _serviceManager) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync(int? typeId, int? brandId, ProductSortingOptions productSorting)
-               => Ok(await _serviceManager.ProductService.GetAllProductsAsync(typeId,brandId,productSorting));
+        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync([FromQuery]ProductSpecificationParameters parameters)
+               => Ok(await _serviceManager.ProductService.GetAllProductsAsync(parameters));
 
         [HttpGet("Brand")]
         public async Task<ActionResult<IEnumerable<BrandResultDto>>> GetAllBrandAsync()
