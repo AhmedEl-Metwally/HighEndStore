@@ -1,4 +1,6 @@
-﻿namespace Persistance.Repositories.GenericRepositorys
+﻿using Domain.Contracts.Specifications;
+
+namespace Persistance.Repositories.GenericRepositorys
 {
     public class GenericRepository<TEntity,TKey>(HighEndStoreDbContext _context) : IGenericRepository<TEntity,TKey> where TEntity : BaseEntity<TKey>
     {
@@ -16,5 +18,14 @@
 
         public void Delete(TEntity entity)
                 => _context.Set<TEntity>().Remove(entity);
+
+
+        //Specifications
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity,TKey> specifications)
+                => await SpecificationEvluator.CreateQuery(_context.Set<TEntity>(), specifications).ToListAsync();
+
+        public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
+                => await SpecificationEvluator.CreateQuery(_context.Set<TEntity>(), specifications).FirstOrDefaultAsync();
     }
 }

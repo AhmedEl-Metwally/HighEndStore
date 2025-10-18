@@ -1,4 +1,6 @@
-﻿namespace Domain.Contracts.GenericRepositorys
+﻿using Domain.Contracts.Specifications;
+
+namespace Domain.Contracts.GenericRepositorys
 {
     public interface IGenericRepository<TEntity,TKey> where TEntity : BaseEntity<TKey> 
     {
@@ -7,5 +9,9 @@
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+
+        //Specifications
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity,TKey> specifications);
+        Task<TEntity?> GetByIdAsync(ISpecifications<TEntity,TKey> specifications);
     }
 }
