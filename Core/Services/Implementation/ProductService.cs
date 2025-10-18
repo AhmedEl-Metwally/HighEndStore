@@ -17,7 +17,7 @@ namespace Services.Implementation
             return brandsResult;
         }
 
-        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(int? typeId, int? brandId)
         {
             var productRep = _unitOfWork.GetRepository<Product,int>() ;
             var specification = new ProductWithBrandAndTypeSpecification();

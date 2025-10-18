@@ -10,8 +10,8 @@ namespace HighEndStore.API.Controllers
     public class ProductController(IServiceManager _serviceManager) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync()
-               => Ok(await _serviceManager.ProductService.GetAllProductsAsync());
+        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync(int? typeId, int? brandId)
+               => Ok(await _serviceManager.ProductService.GetAllProductsAsync(typeId,brandId));
 
         [HttpGet("Brand")]
         public async Task<ActionResult<IEnumerable<BrandResultDto>>> GetAllBrandAsync()
