@@ -27,5 +27,8 @@ namespace Persistance.Repositories.GenericRepositorys
 
         public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
                 => await SpecificationEvluator.CreateQuery(_context.Set<TEntity>(), specifications).FirstOrDefaultAsync();
+
+        public async Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications)
+                 => await SpecificationEvluator.CreateQuery(_context.Set<TEntity>(),specifications).CountAsync();
     }
 }

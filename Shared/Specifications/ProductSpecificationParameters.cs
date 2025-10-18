@@ -10,8 +10,8 @@ namespace Shared.Specifications
         public string? Search { get; set; }
 
         private const int defaultPageSize = 5;
-        private const int maxPageSize = 5;
-        public int pageIndex { get; set; }
+        private const int maxPageSize = 10;
+        public int pageIndex { get; set; } = 1;
 
         private int _pageSize = defaultPageSize ;
 
