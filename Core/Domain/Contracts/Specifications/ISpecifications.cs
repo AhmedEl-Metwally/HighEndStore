@@ -9,5 +9,8 @@ namespace Domain.Contracts.Specifications
 
         public Expression<Func<TEntity,object>> orderBy { get; }
         public Expression<Func<TEntity,object>> orderDescending { get; }
+        public int Skip { get;  }
+        public int Take { get;  }
+        public bool Ispaginated{ get;  }
     }
 }
