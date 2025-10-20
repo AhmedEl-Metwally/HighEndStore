@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Controllers\ProductController.cs~RF4750f25.TMP" />
+    <None Remove="Middlewares\GlobalExceptionHandLingMiddleware.cs~RF587c745.TMP" />
   </ItemGroup>
 
   <ItemGroup>

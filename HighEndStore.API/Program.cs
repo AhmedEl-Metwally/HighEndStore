@@ -1,7 +1,7 @@
 ﻿using Domain.Contracts.SeedData;
 using Domain.Contracts.UnitOfWorks;
+using HighEndStore.API.Middlewares;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
 using Persistance.Repositories.UnitOfWorks;
@@ -39,6 +39,7 @@ using var scope = app.Services.CreateScope();
 var objOfSeedData = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 await objOfSeedData.SeedDataAsync();
 // Configure the HTTP request pipeline.
+app.UseMiddleware<GlobalExceptionHandLingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     // app.MapOpenApi();
