@@ -16,6 +16,12 @@
             try
             {
                 await _next(context);
+                if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+                {
+                    var handler = new HandleException();
+                     await handler.HandLeNotFoundApiAsync(context);
+                }
+                   
             }
             catch (Exception ex)
             {
@@ -26,6 +32,6 @@
             }
         }
 
-      
+     
     }
 }

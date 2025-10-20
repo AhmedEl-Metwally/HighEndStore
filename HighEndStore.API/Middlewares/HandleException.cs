@@ -22,5 +22,18 @@ namespace HighEndStore.API.Middlewares
             }.ToString();
             await context.Response.WriteAsync(response);    
         }
+
+        public async Task HandLeNotFoundApiAsync(HttpContext context)
+        {
+           context.Request.ContentType = "application/json";    
+            var response = new ErrorDetails() 
+            {
+                StatusCode = context.Response.StatusCode,
+                ErrorMessage = $"The endpoint with {context.Request.Path} not fount"
+            }.ToString();  
+            await context.Response.WriteAsync(response);
+        }
+
     }
+
 }
