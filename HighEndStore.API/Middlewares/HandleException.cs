@@ -1,4 +1,5 @@
-﻿using Shared.ErrorModels;
+﻿using Domain.Exceptions;
+using Shared.ErrorModels;
 
 namespace HighEndStore.API.Middlewares
 {
@@ -6,7 +7,12 @@ namespace HighEndStore.API.Middlewares
     {
         public async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.StatusCode = ex switch 
+            {
+                NotFoundException => StatusCodes.Status404NotFound,
+                (_) => StatusCodes.Status500InternalServerError
+            };
+
             context.Response.ContentType = "application/json";
 
             var response = new ErrorDetails()
