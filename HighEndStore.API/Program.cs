@@ -1,6 +1,8 @@
 ﻿using Domain.Contracts.SeedData;
 using Domain.Contracts.UnitOfWorks;
+using HighEndStore.API.Factorys;
 using HighEndStore.API.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
@@ -28,7 +30,10 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddAutoMapper(Mapping => Mapping.AddProfile(new ProductProfile()));
 builder.Services.AddTransient<PictureUrlResolver>();
 
-
+builder.Services.Configure<ApiBehaviorOptions>(options => 
+{
+    options.InvalidModelStateResponseFactory = ApiResponceFactory.CustomValidationErrorResponse;
+});
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
