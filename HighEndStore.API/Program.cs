@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddWebApiServices();
 builder.Services.AddCoreServices();
-builder.Services.AddServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
