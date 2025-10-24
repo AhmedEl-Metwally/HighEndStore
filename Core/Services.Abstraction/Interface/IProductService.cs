@@ -1,5 +1,5 @@
 ﻿using Shared;
-using Shared.Dtos.ProductsDto;
+using Shared.DTOS.ProductsDto;
 using Shared.Specifications;
 
 namespace Services.Abstraction.Interface

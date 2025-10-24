@@ -28,6 +28,7 @@ namespace HighEndStore.API.Extensions
 
             services.AddScoped<IDataSeeding, DataSeeding>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
 

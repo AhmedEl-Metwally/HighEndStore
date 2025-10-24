@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities.ProductModule;
-using Shared.Dtos.ProductsDto;
+using Shared.DTOS.ProductsDto;
 
 namespace Services.Mapping
 {

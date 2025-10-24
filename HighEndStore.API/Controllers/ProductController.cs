@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Interface;
 using Shared;
-using Shared.Dtos.ProductsDto;
+using Shared.DTOS.ProductsDto;
 using Shared.ErrorModels;
 using Shared.Specifications;
 
