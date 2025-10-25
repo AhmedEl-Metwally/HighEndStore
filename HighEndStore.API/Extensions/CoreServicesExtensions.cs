@@ -8,7 +8,12 @@ namespace HighEndStore.API.Extensions
     {
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Mapping => Mapping.AddProfile(new ProductProfile()));
+            services.AddAutoMapper(Mapping =>
+            {
+                Mapping.AddProfile(new ProductProfile());
+                Mapping.AddProfile(new BasketMapping());
+            });
+
             services.AddTransient<PictureUrlResolver>();
             services.AddScoped<IServiceManager, ServiceManager>();
             return services;
