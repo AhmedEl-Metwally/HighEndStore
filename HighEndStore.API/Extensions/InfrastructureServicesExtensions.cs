@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistance.BasketRepositorys;
 using Persistance.Data.Context;
 using Persistance.Data.SeedData;
+using Persistance.Identity;
 using Persistance.Repositories.UnitOfWorks;
 using Services.Abstraction.Interface;
 using Services.Implementation;
@@ -19,6 +20,11 @@ namespace HighEndStore.API.Extensions
             services.AddDbContext<HighEndStoreDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString"));
+            });
+
+            services.AddDbContext<IdentityHighEndStoreDbContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("IdentityConnectionString"));
             });
 
             services.AddSingleton<IConnectionMultiplexer>((_) => 
