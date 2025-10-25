@@ -1,7 +1,14 @@
-﻿
+﻿using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+
 namespace Persistance.Data.SeedData
 {
-    public class DataSeeding(HighEndStoreDbContext _context) : IDataSeeding
+    public class DataSeeding(
+                                HighEndStoreDbContext _context,
+                                RoleManager<IdentityRole> _roleManager,
+                                UserManager<User> _userManager
+                            ) : IDataSeeding
     {
         public async Task SeedDataAsync()
         {
@@ -39,6 +46,51 @@ namespace Persistance.Data.SeedData
 
 				throw;
 			}
+        }
+
+        public async Task SeedIdentityDataAsync()
+        {
+            try
+            {
+                if (!_roleManager.Roles.Any())
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                    await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+                }
+
+                if (!_userManager.Users.Any())
+                {
+                    var adminUser = new User()
+                    {
+                        DisplayName = "Admin User",
+                        UserName = "Admin",
+                        Email = "Admin@gmail.com",
+                        PhoneNumber = "01091399362"
+                    };
+
+                    var superAdmin = new User()
+                    {
+                        DisplayName = "Super Admin",
+                        UserName = "Super",
+                        Email = "SuperAdmin@gmail.com",
+                        PhoneNumber = "01001399362"
+                    };
+
+                    adminUser = await _userManager.FindByEmailAsync("Admin@gmail.com");
+                    superAdmin = await _userManager.FindByEmailAsync("SuperAdmin@gmail.com");
+
+                    await _userManager.AddToRoleAsync(adminUser, "Admin");
+                    await _userManager.AddToRoleAsync(superAdmin, "SuperAdmin");
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
         }
     }
 }

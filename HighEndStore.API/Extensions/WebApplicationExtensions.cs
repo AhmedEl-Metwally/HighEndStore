@@ -9,6 +9,7 @@ namespace HighEndStore.API.Extensions
             using var scope = webApplication.Services.CreateScope();
             var objOfSeedData = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
             await objOfSeedData.SeedDataAsync();
+            await objOfSeedData.SeedDataAsync();
             return webApplication;
         }
     }

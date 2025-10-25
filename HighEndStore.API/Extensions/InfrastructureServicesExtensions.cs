@@ -1,6 +1,8 @@
 ﻿using Domain.Contracts.BasketRepositorys;
 using Domain.Contracts.SeedData;
 using Domain.Contracts.UnitOfWorks;
+using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistance.BasketRepositorys;
 using Persistance.Data.Context;
@@ -37,6 +39,8 @@ namespace HighEndStore.API.Extensions
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddDataProtection();
+            services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityHighEndStoreDbContext>().AddDefaultTokenProviders();
 
             return services;
         }
