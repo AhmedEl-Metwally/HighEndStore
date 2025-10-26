@@ -10,7 +10,9 @@ namespace Services.Implementation
     {
         public async Task<UserResultDto> LoginAsync(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email) ?? throw new UnAuthenticationException();
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+                if(user is null) throw new UnAuthenticationException();
+           
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!result)
                 throw new UnAuthenticationException();

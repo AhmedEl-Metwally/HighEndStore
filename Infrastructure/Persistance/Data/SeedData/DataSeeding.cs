@@ -64,7 +64,7 @@ namespace Persistance.Data.SeedData
                     {
                         DisplayName = "Admin User",
                         UserName = "Admin",
-                        Email = "Admin@gmail.com",
+                        Email = "Adminn@gmail.com",
                         PhoneNumber = "01091399362"
                     };
 
@@ -72,12 +72,12 @@ namespace Persistance.Data.SeedData
                     {
                         DisplayName = "Super Admin",
                         UserName = "Super",
-                        Email = "SuperAdmin@gmail.com",
+                        Email = "SuperAdminn@gmail.com",
                         PhoneNumber = "01001399362"
                     };
 
-                    adminUser = await _userManager.FindByEmailAsync("Admin@gmail.com");
-                    superAdmin = await _userManager.FindByEmailAsync("SuperAdmin@gmail.com");
+                    await _userManager.CreateAsync(adminUser,"p@sswOrd");
+                    await _userManager.CreateAsync(superAdmin,"p@sswOrd");
 
                     await _userManager.AddToRoleAsync(adminUser, "Admin");
                     await _userManager.AddToRoleAsync(superAdmin, "SuperAdmin");
