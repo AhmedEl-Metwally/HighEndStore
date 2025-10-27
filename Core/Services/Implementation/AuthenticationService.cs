@@ -1,8 +1,12 @@
 ﻿using Domain.Entities.IdentityModule;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Services.Abstraction.Interface;
 using Shared.DTOS.IdentityModule;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Services.Implementation
 {
@@ -16,7 +20,7 @@ namespace Services.Implementation
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!result)
                 throw new UnAuthenticationException();
-            return new UserResultDto( user.DisplayName, "Token",user.Email);
+            return new UserResultDto( user.DisplayName, await CreateTokenAsync(user),user.Email);
         }
 
         public async Task<UserResultDto> RegisterAsync(RegisterDto registerDto)
@@ -36,7 +40,39 @@ namespace Services.Implementation
                 throw new ValidationException(errors);
             }
 
-            return new UserResultDto(user.DisplayName, "Token", user.Email);
+            return new UserResultDto(user.DisplayName, await CreateTokenAsync(user), user.Email);
         }
+
+
+        private async Task<string> CreateTokenAsync(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.DisplayName),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+                claims.Add(new Claim(ClaimTypes.Role,role));
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("f9fc2585128031ee1f81016edaafb37aa2ba0fc6101715193982e211dd2e216b"));
+            var signInCreds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken
+                (
+                    issuer : "https://localhost:44323/",
+                    audience : "AngularProject",
+                    claims : claims,
+                    expires : DateTime.UtcNow.AddDays(30),
+                    signingCredentials : signInCreds
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+
+        }
+
+
     }
 }
