@@ -1,12 +1,13 @@
 ﻿using Services.Abstraction.Interface;
 using Services.Implementation;
 using Services.Mapping;
+using Shared.Common;
 
 namespace HighEndStore.API.Extensions
 {
     public static class CoreServicesExtensions
     {
-        public static IServiceCollection AddCoreServices(this IServiceCollection services)
+        public static IServiceCollection AddCoreServices(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddAutoMapper(Mapping =>
             {
@@ -16,6 +17,8 @@ namespace HighEndStore.API.Extensions
 
             services.AddTransient<PictureUrlResolver>();
             services.AddScoped<IServiceManager, ServiceManager>();
+            services.Configure<JwtOption>(configuration.GetSection("JwtOptions"));
+
             return services;
         }
     }

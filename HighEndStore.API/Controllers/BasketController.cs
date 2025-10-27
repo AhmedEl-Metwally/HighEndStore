@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Interface;
 using Shared.DTOS.BasketsDto;
 
@@ -6,6 +7,7 @@ namespace HighEndStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BasketController(IServiceManager _serviceManager) : ControllerBase
     {
         [HttpGet]
