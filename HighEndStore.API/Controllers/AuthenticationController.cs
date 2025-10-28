@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Interface;
-using Shared.DTOS.IdentityModule;
+using Shared.DTOS.IdentityDto;
 
 namespace HighEndStore.API.Controllers
 {

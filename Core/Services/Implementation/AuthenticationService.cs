@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstraction.Interface;
 using Shared.Common;
-using Shared.DTOS.IdentityModule;
+using Shared.DTOS.IdentityDto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

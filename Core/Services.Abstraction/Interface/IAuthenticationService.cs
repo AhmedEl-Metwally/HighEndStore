@@ -1,4 +1,4 @@
-﻿using Shared.DTOS.IdentityModule;
+﻿using Shared.DTOS.IdentityDto;
 
 namespace Services.Abstraction.Interface
 {

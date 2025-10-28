@@ -4,7 +4,7 @@ namespace Domain.Entities.OrderModule
     public class Order : BaseEntity<Guid>
     {
         public string UserEmail { get; set; } = string.Empty;
-        public Address ShippingAddress  { get; set; } = new Address();
+        public ShippingAddress ShippingAddress  { get; set; } 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public OrderPaymentStatus PaymentStatus { get; set; } = OrderPaymentStatus.Pending;
         public DeliveryMethod DeliveryMethod { get; set; } = default!;

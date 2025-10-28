@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared.DTOS.IdentityModule
+namespace Shared.DTOS.IdentityDto
 {
     public record RegisterDto
     {

@@ -1,4 +1,4 @@
-﻿namespace Shared.DTOS.IdentityModule
+﻿namespace Shared.DTOS.IdentityDto
 {
     public record LoginDto
     {
