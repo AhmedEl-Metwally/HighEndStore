@@ -6,5 +6,17 @@
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
+        public OrderItem(ProductInOrderItem productInOrderItem, decimal price, int quantity)
+        {
+            ProductInOrderItem = productInOrderItem;
+            Price = price;
+            Quantity = quantity;
+        }
+
+        public OrderItem()
+        {
+
+        }
+
     }
 }

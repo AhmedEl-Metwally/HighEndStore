@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistance.Data.Context;
 
@@ -11,9 +12,11 @@ using Persistance.Data.Context;
 namespace Persistance.Data.Migrations
 {
     [DbContext(typeof(HighEndStoreDbContext))]
-    partial class HighEndStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251028162724_OrderModule")]
+    partial class OrderModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

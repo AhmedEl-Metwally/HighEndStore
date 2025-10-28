@@ -1,5 +1,4 @@
 ﻿
-
 namespace Domain.Entities.OrderModule
 {
     public class Address
@@ -9,5 +8,19 @@ namespace Domain.Entities.OrderModule
         public string Country { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string Street { get; set; } = string.Empty;
+
+        public Address()
+        {
+
+        }
+        public Address(string firstName, string lastName, string country, string city, string street)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Country = country;
+            City = city;
+            Street = street;
+        }
+
     }
 }

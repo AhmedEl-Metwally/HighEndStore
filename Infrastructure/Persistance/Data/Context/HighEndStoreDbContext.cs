@@ -1,4 +1,6 @@
-﻿namespace Persistance.Data.Context
+﻿using Domain.Entities.OrderModule;
+
+namespace Persistance.Data.Context
 {
     public class HighEndStoreDbContext(DbContextOptions<HighEndStoreDbContext> options) : DbContext(options)
     {
@@ -12,6 +14,9 @@
         public DbSet<Product> Products{ get; set; }
         public DbSet<ProductType> ProductTypes{ get; set; }
         public DbSet<ProductBrand> ProductBrands{ get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
     }
 }
 
