@@ -13,6 +13,7 @@ namespace HighEndStore.API.Extensions
             {
                 Mapping.AddProfile(new ProductProfile());
                 Mapping.AddProfile(new BasketMapping());
+                Mapping.AddProfile(new OrderMapping());
             });
 
             services.AddTransient<PictureUrlResolver>();

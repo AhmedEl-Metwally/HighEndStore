@@ -43,6 +43,7 @@ namespace HighEndStore.API.Extensions
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDataProtection();
             services.ValidateJwtToken(configuration);
