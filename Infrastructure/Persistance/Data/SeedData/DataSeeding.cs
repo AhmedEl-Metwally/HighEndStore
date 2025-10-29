@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.IdentityModule;
+using Domain.Entities.OrderModule;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 
 namespace Persistance.Data.SeedData
 {
@@ -38,6 +38,13 @@ namespace Persistance.Data.SeedData
                     var Products = await JsonSerializer.DeserializeAsync<List<Product>>(ProductsData);
                     if (Products is not null && Products.Any())
                         await _context.Products.AddRangeAsync(Products);
+                }
+                if(!_context.DeliveryMethods.Any())
+                {
+                    var DeliveryMethodsData = File.OpenRead("..\\Infrastructure\\Persistance\\Data\\SeedData\\DataSeed\\delivery.json");
+                    var DeliveryMethods = await JsonSerializer.DeserializeAsync<List<DeliveryMethod>>(DeliveryMethodsData);
+                    if (DeliveryMethods is not null && DeliveryMethods.Any())
+                        await _context.DeliveryMethods.AddRangeAsync(DeliveryMethods);
                 }
                 await _context.SaveChangesAsync();
             }
