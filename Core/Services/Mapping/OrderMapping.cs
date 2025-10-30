@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Entities.OrderModule;
 using Shared.DTOS.OrderDto;
+using Address = Domain.Entities.IdentityModule.Address;
+using ShippingAddress = Domain.Entities.OrderModule.Address;
 
 namespace Services.Mapping
 {
@@ -8,7 +10,8 @@ namespace Services.Mapping
     {
         public OrderMapping()
         {
-            CreateMap<Address,AddressDto>().ReverseMap();
+            CreateMap<ShippingAddress, AddressDto>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<DeliveryMethod,DeliveryMethodResultDto>();
 
             CreateMap<OrderItem, OrderItemDto>()
