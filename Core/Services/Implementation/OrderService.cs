@@ -25,11 +25,18 @@ namespace Services.Implementation
                 orderItem.Add(CreateOrderItem(product,baskets));
             }
 
+            var orderRepo = _unitOfWork.GetRepository<Order,Guid>();
+
             var deliveryMethod = await _unitOfWork.GetRepository<DeliveryMethod,int>().GetByIdAsync(order.DeliveryMethodId) 
                                                             ?? throw new DeliveryMethodNotFoundException(order.DeliveryMethodId);
+
+            var orderExists = await orderRepo.GetByIdAsync(new OrderWithPaymentIntentIdSpecifications(basket.PaymentIntentId));
+            if (orderExists != null)
+                orderRepo.Delete(orderExists);
+
             var subTotal = orderItem.Sum(O => O.Price * O.Quantity);
-            var orderToCreate = new Order(userEmail,address,orderItem,deliveryMethod,subTotal);
-            await _unitOfWork.GetRepository<Order, Guid>().AddAsync(orderToCreate);
+            var orderToCreate = new Order(userEmail,address,orderItem,deliveryMethod,subTotal,basket.PaymentIntentId);
+            await orderRepo.AddAsync(orderToCreate);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<OrderResultDto>(orderToCreate);
         }

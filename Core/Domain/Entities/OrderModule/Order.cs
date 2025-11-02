@@ -13,7 +13,7 @@ namespace Domain.Entities.OrderModule
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.UtcNow;
         public string PaymentIntentId { get; set; } = string.Empty;
 
-        public Order(string userEmail, ShippingAddress shippingAddress, ICollection<OrderItem> orderItems, DeliveryMethod deliveryMethod, decimal subTotal)
+        public Order(string userEmail, ShippingAddress shippingAddress, ICollection<OrderItem> orderItems, DeliveryMethod deliveryMethod, decimal subTotal, string PaymentIntentId)
         {
             Id = Guid.NewGuid();
             UserEmail = userEmail;
@@ -21,6 +21,7 @@ namespace Domain.Entities.OrderModule
             OrderItems = orderItems;
             DeliveryMethod = deliveryMethod;
             SubTotal = subTotal;
+           this.PaymentIntentId = PaymentIntentId;
         }
 
         public Order()
