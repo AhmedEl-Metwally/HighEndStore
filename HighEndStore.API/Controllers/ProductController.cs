@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HighEndStore.API.Attributes;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Interface;
 using Shared;
 using Shared.DTOS.ProductsDto;
@@ -11,6 +12,7 @@ namespace HighEndStore.API.Controllers
     [ApiController]
     public class ProductController(IServiceManager _serviceManager) : ControllerBase
     {
+        [RedisCache(120)]
         [HttpGet]
         public async Task<ActionResult<PaginatedResult<ProductResultDto>>> GetAllProductsAsync([FromQuery]ProductSpecificationParameters parameters)
                => Ok(await _serviceManager.ProductService.GetAllProductsAsync(parameters));
