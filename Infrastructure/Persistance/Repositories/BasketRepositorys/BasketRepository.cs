@@ -3,7 +3,7 @@ using Domain.Entities.BasketModule;
 using StackExchange.Redis;
 
 
-namespace Persistance.BasketRepositorys
+namespace Persistence.Repositories.BasketRepositorys
 {
     public class BasketRepository(IConnectionMultiplexer _connection ) : IBasketRepository
     {

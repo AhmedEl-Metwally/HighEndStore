@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Services.Abstraction.Interface;
+﻿using Services.Abstraction.Interface;
 using Services.Implementation;
 using Services.Mapping;
 using Shared.Common;
@@ -34,6 +33,9 @@ namespace HighEndStore.API.Extensions
 
             services.AddScoped<IPaymentService,PaymentService>();
             services.AddScoped<Func<IPaymentService>>(provider => ()=> provider.GetRequiredService<IPaymentService>());
+
+            services.AddScoped<ICacheService,CacheService>();
+            services.AddScoped<Func<ICacheService>>(provider => ()=> provider.GetRequiredService<ICacheService>());
 
             services.Configure<JwtOption>(configuration.GetSection("JwtOptions"));
 
